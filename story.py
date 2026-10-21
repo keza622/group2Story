@@ -129,6 +129,14 @@ class MarketTrip:
             return f"{self.student} completes {choice.name}: {needed:,} UGX."
         return f"Not enough UGX for {choice.name}. Nothing recorded."
 
+    def cancel_last(self):
+        if not self._entries:  # Empty history
+            return False
+        last = self._entries.pop()  # Remove the latest record
+        refund = last["cost"]       # Refund the recorded amount
+        self.wallet.remaining += refund
+        return True
+
 
 def show_choices(choices):
     for choice in choices:
@@ -155,6 +163,11 @@ def main():
     for parent in FeaturedBundle.__mro__:
         print(parent.__name__)
     print("Ending: The basket has dinner ingredients, and no one has promised money they do not have.")
+    print(session.cancel_last())
+    print(session.wallet.remaining, session.completed_count)
+
+    print(session.cancel_last())
+    print(session.wallet.remaining, session.completed_count)
 
 
 if __name__ == "__main__":
