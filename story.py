@@ -134,6 +134,14 @@ def show_choices(choices):
     for choice in choices:
         print(choice.describe())  # Same call, different implementations.
 
+# FOUNDATION 4: Find choices that fit the budget
+def affordable(choices, limit):
+    if limit < 0:
+        raise ValueError("Limit cannot be negative.")
+
+    return [choice for choice in choices if choice.price() <= limit]
+
+
 
 # ACT 5: A complete story, including a refusal and independent object state.
 def main():
@@ -142,6 +150,21 @@ def main():
     choices = [MatookeBundle(), GroundnutPack("Groundnut pack"),
                FeaturedBundle(), GardenGift(), NeighbourGift()]
     show_choices(choices)  # Includes an unrelated duck-typed guest.
+
+    # Test Foundation 4
+    affordable_choices = affordable(choices, 2000)
+
+    print("\n=== AFFORDABLE CHOICES (2000 UGX) ===")
+    for choice in affordable_choices:
+        print(f"{choice.name}: {choice.price():,} UGX")
+
+    print("Empty list:", affordable([], 2000))
+
+    try:
+        affordable(choices, -100)
+    except ValueError as error:
+        print("Negative limit rejected:", error)
+
     session = MarketTrip("Kato", 7000)
     other = MarketTrip("Alex", 7000)
     print(session.buy(choices[2]))
