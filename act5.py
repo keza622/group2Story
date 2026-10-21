@@ -96,7 +96,17 @@ class GardenGift:  # No shared parent: callers use its matching behaviour.
 
     def describe(self):
         return "Garden gift: 0 UGX in this classroom model."
+    
+# Foundation 3: A guest from a different family
+class NeighbourGift:   # No inheritance from MarketItem
+    def __init__(self):
+        self.name = "Neighbour gift"
 
+    def describe(self):
+        return "Neighbour gift: 0 UGX in this classroom model."
+
+    def price(self):
+        return 0
 
 # ACT 4: The coordinator HAS-A resource, and USES-A chosen object.
 class MarketTrip:
@@ -130,7 +140,7 @@ def main():
     print("=== MUKONO MARKET BASKET ===")
     print("Kato is shopping for the hostel cooking group. The shopping list is longer than the budget.")
     choices = [MatookeBundle(), GroundnutPack("Groundnut pack"),
-               FeaturedBundle(), GardenGift()]
+               FeaturedBundle(), GardenGift(), NeighbourGift()]
     show_choices(choices)  # Includes an unrelated duck-typed guest.
     session = MarketTrip("Kato", 7000)
     other = MarketTrip("Alex", 7000)
