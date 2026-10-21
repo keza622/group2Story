@@ -49,7 +49,7 @@ class TomatoPack(MarketItem):
         self.packs = packs
 
     def price(self):
-        return self.packs * 800
+        return self.packs * 900
 
 
 
@@ -182,3 +182,13 @@ def main():
 
 if __name__ == "__main__":
     main()
+    ## Foundation 6: One more level of reuse
+
+class NeighbourBundle(SharedMatooke):
+
+    def __init__(self, quantity):
+        super().__init__(quantity)
+        self.name = "Neighbour Bundle"
+
+    def price(self):
+        return max(0, super().price() - 300)
