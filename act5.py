@@ -49,7 +49,7 @@ class TomatoPack(MarketItem):
         self.packs = packs
 
     def price(self):
-        return self.packs * 700
+        return self.packs * 900
 
 
 
