@@ -41,7 +41,15 @@ class MarketItem(ABC):
         pass
 
 
-#kong
+class TomatoPack(MarketItem):
+    def _init_(self, packs=1):
+        if not isinstance(packs, int) or isinstance(packs, bool) or packs <= 0:
+            raise ValueError("Packs must be a positive whole number.")
+        super()._init_("Tomato pack")
+        self.packs = packs
+
+    def price(self):
+        return self.packs * 900
 
 
 
